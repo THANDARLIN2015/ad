@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-0000000000000000">
+    <meta name="google-adsense-account" content="ca-pub-3940256099942544">
     <title>DTAC TRUE AIS FREE SERVERS</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cordova-admob@4.1.15/www/admob.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -35,6 +35,7 @@
             background-color: var(--background);
             color: var(--text);
             transition: all 0.3s ease;
+            padding-bottom: 70px;
         }
 
         .container {
@@ -46,7 +47,6 @@
         header {
             text-align: center;
             margin-bottom: 30px;
-            position: relative;
         }
 
         .clock {
@@ -64,15 +64,22 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .mode-toggle {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
+        .floating-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            color: var(--text);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border: none;
         }
 
         .config-section {
@@ -134,11 +141,16 @@
         .banner-ad {
             width: 100%;
             height: auto;
+            min-height: 100px;
             background-color: var(--card-bg);
             border: 1px solid var(--border);
             padding: 15px;
             border-radius: 5px;
             margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
         }
 
         footer {
@@ -164,24 +176,15 @@
 <body>
     <div class="container">
         <header>
-            <button class="mode-toggle" id="modeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
             <div class="clock" id="clock">Loading...</div>
             <h1>DTAC TRUE AIS FREE SERVERS</h1>
         </header>
 
         <!-- Banner Ad -->
         <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-0000000000000000"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <div id="bannerAdTop" class="banner-ad">
+                Loading Banner Ad...
+            </div>
         </div>
 
         <!-- V2Ray Section -->
@@ -220,15 +223,9 @@
 
         <!-- Another Banner Ad -->
         <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-0000000000000000"
-                 data-ad-slot="0987654321"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <div id="bannerAdBottom" class="banner-ad">
+                Loading Banner Ad...
+            </div>
         </div>
 
         <footer>
@@ -237,7 +234,84 @@
         </footer>
     </div>
 
+    <!-- Floating Toggle Button -->
+    <button class="floating-toggle" id="modeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <script>
+        // AdMob Configuration for Android APK
+        document.addEventListener('deviceready', initApp, false);
+        
+        function initApp() {
+            // Initialize AdMob
+            admob.initialize({
+                requestTrackingAuthorization: true,
+                testingDevices: ['TEST_DEVICE_ID_ANDROID', 'TEST_DEVICE_ID_IOS'],
+                initializeForTesting: true
+            }).then(() => {
+                // Load banner ads
+                loadBannerAd('bannerAdTop', 'ca-app-pub-3940256099942544/6300978111');
+                loadBannerAd('bannerAdBottom', 'ca-app-pub-3940256099942544/6300978111');
+                
+                // Set up reward ad
+                setupRewardAd('ca-app-pub-3940256099942544/5224354917');
+            });
+        }
+
+        function loadBannerAd(containerId, adUnitId) {
+            const adContainer = document.getElementById(containerId);
+            
+            // Create banner
+            const banner = new admob.BannerAd({
+                adUnitId: adUnitId,
+                position: 'bottom'
+            });
+            
+            // Load and show banner
+            banner.load().then(() => {
+                banner.show();
+                adContainer.innerHTML = '<i class="fas fa-ad"></i> Ad Loaded';
+            }).catch(err => {
+                adContainer.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Ad Failed: ' + err.message;
+            });
+        }
+
+        function setupRewardAd(adUnitId) {
+            const rewardAd = new admob.RewardedAd({
+                adUnitId: adUnitId
+            });
+            
+            document.getElementById('rewardAdBtn').addEventListener('click', () => {
+                rewardAd.load().then(() => rewardAd.show())
+                    .then(() => {
+                        alert('Reward earned! Premium config unlocked.');
+                        // Unlock premium content here
+                    })
+                    .catch(err => {
+                        alert('Ad failed: ' + err.message);
+                    });
+            });
+        }
+
+        // Fallback for browser testing
+        if (typeof admob === 'undefined') {
+            console.log('AdMob not available - running in browser');
+            
+            // Mock banner ads
+            document.getElementById('bannerAdTop').innerHTML = '<i class="fas fa-ad"></i> TEST BANNER AD (Top)';
+            document.getElementById('bannerAdBottom').innerHTML = '<i class="fas fa-ad"></i> TEST BANNER AD (Bottom)';
+            
+            // Mock reward ad
+            document.getElementById('rewardAdBtn').addEventListener('click', function() {
+                if(confirm('This would show a reward ad. Continue?')) {
+                    setTimeout(() => {
+                        alert('Reward earned! Here is your premium config: https://raw.githubusercontent.com/yourrepo/premium-config.json');
+                    }, 1000);
+                }
+            });
+        }
+
         // Dark/Light Mode Toggle
         const modeToggle = document.getElementById('modeToggle');
         const body = document.body;
@@ -279,23 +353,6 @@
         
         setInterval(updateClock, 1000);
         updateClock();
-
-        // AdMob Reward Ad
-        document.getElementById('rewardAdBtn').addEventListener('click', function() {
-            // In a real app, you would call the AdMob API here
-            alert('Reward ad would play here. After completion, premium config would be unlocked.');
-            
-            // For demo purposes, we'll just show a success message
-            setTimeout(() => {
-                alert('Ad completed! Here is your premium configuration link: https://raw.githubusercontent.com/yourrepo/premium-config.json');
-            }, 1500);
-        });
-
-        // Initialize AdMob (this would be more extensive in a real app)
-        document.addEventListener('DOMContentLoaded', function() {
-            // AdMob initialization code would go here
-            console.log('AdMob test ads initialized');
-        });
     </script>
 </body>
 </html>

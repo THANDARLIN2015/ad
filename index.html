@@ -3,331 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V2Ray Configuration Hub</title>
+    <meta name="google-adsense-account" content="ca-pub-0000000000000000">
+    <title>DTAC TRUE AIS FREE SERVERS</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --dark: #1b263b;
-            --light: #f8f9fa;
-            --success: #4cc9f0;
-            --warning: #f72585;
+            --primary: #3a7bd5;
+            --secondary: #00d2ff;
+            --text: #333;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e1e1e1;
         }
-        
+
+        .dark-mode {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --text: #f0f0f0;
+            --background: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border: #333;
+        }
+
         body {
             font-family: 'Pyidaungsu', 'Noto Sans Myanmar', sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
         }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 0;
             text-align: center;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            position: relative;
         }
-        
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        
-        .subtitle {
+
+        .clock {
             font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 0.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
-        
-        .config-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+
+        h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
+
+        .mode-toggle {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .config-section {
+            margin-bottom: 40px;
+        }
+
         .config-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px var(--shadow);
+            border: 1px solid var(--border);
             transition: transform 0.3s ease;
         }
-        
+
         .config-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
-        
-        .card-header {
-            background: var(--accent);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
+
+        .config-title {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary);
         }
-        
-        .v2ray .card-header { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
-        .netmod .card-header { background: linear-gradient(135deg, #4895ef, #4cc9f0); }
-        .ziudp .card-header { background: linear-gradient(135deg, #7209b7, #f72585); }
-        
-        .card-body {
-            padding: 1.5rem;
+
+        .config-desc {
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
-        
-        .config-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .config-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        
-        .config-name {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .config-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-        
+
         .btn {
             display: inline-block;
-            padding: 0.6rem 1.2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-align: center;
-            margin-top: 0.5rem;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary);
-        }
-        
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-        
-        .qr-section {
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
             text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 6px var(--shadow);
         }
-        
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-            background: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px var(--shadow);
         }
-        
+
+        .ads-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .banner-ad {
+            width: 100%;
+            height: auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding: 1.5rem;
-            color: #666;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border);
         }
-        
-        @media (max-width: 768px) {
-            .config-types {
-                grid-template-columns: 1fr;
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>V2Ray Configuration Hub</h1>
-            <p class="subtitle">High-performance proxy configurations for all needs</p>
-        </div>
-    </header>
-    
     <div class="container">
-        <div class="config-types">
-            <!-- V2Ray Config Section -->
-            <div class="config-card v2ray">
-                <div class="card-header">
-                    <h2><i class="fas fa-shield-alt"></i> V2Ray Config</h2>
-                </div>
-                <div class="card-body">
-                    <div class="config-item">
-                        <div class="config-name">VMESS + TLS + WS</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: SG-1</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-15</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/vmess_config.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">VLESS + XTLS</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: JP-2</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-10</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/vless_config.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Trojan + TLS</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: US-3</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-05</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/trojan_config.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- NetMod Config Section -->
-            <div class="config-card netmod">
-                <div class="card-header">
-                    <h2><i class="fas fa-bolt"></i> NetMod Config</h2>
-                </div>
-                <div class="card-body">
-                    <div class="config-item">
-                        <div class="config-name">NetMod UDP Basic</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: HK-1</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-14</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/netmod_basic.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">NetMod UDP Advanced</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: TW-2</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-08</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/netmod_advanced.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">NetMod UDP Premium</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: KR-3</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-01</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/netmod_premium.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ZiUDP Config Section -->
-            <div class="config-card ziudp">
-                <div class="card-header">
-                    <h2><i class="fas fa-rocket"></i> ZiUDP Config</h2>
-                </div>
-                <div class="card-body">
-                    <div class="config-item">
-                        <div class="config-name">ZiUDP Standard</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: DE-1</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-12</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/ziudp_standard.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">ZiUDP Turbo</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: FR-2</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-11-06</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/ziudp_turbo.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">ZiUDP Extreme</div>
-                        <div class="config-meta">
-                            <span><i class="fas fa-server"></i> Server: UK-3</span>
-                            <span><i class="fas fa-clock"></i> Updated: 2023-10-30</span>
-                        </div>
-                        <a href="https://raw.githubusercontent.com/username/repo/main/ziudp_extreme.json" class="btn btn-primary btn-block" download>
-                            <i class="fas fa-download"></i> Download Config
-                        </a>
-                    </div>
-                </div>
+        <header>
+            <button class="mode-toggle" id="modeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="clock" id="clock">Loading...</div>
+            <h1>DTAC TRUE AIS FREE SERVERS</h1>
+        </header>
+
+        <!-- Banner Ad -->
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-0000000000000000"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- V2Ray Section -->
+        <div class="config-section">
+            <div class="config-card">
+                <h2 class="config-title">V2RAY Configurations</h2>
+                <p class="config-desc">High-speed V2Ray configurations for DTAC, TRUE, and AIS networks. Stable connection with UDP support.</p>
+                <a href="https://raw.githubusercontent.com/yourrepo/v2ray-config.json" class="btn" download>GET NOW</a>
             </div>
         </div>
-        
-        <div class="qr-section">
-            <h3><i class="fas fa-mobile-alt"></i> Mobile Configuration</h3>
-            <p>Scan QR code to import configuration directly to your device</p>
-            <div class="qr-code">
-                [QR Code Placeholder]
+
+        <!-- NetMod Section -->
+        <div class="config-section">
+            <div class="config-card">
+                <h2 class="config-title">NETMOD Configurations</h2>
+                <p class="config-desc">Optimized NetMod UDP configurations for maximum speed and reliability on all Thai networks.</p>
+                <a href="https://raw.githubusercontent.com/yourrepo/netmod-config.json" class="btn" download>GET NOW</a>
             </div>
-            <p>or</p>
-            <a href="#" class="btn btn-primary">
-                <i class="fas fa-file-export"></i> Generate Custom QR
-            </a>
         </div>
-    </div>
-    
-    <footer>
-        <div class="container">
-            <p>© 2023 V2Ray Configuration Hub | All configurations are updated regularly</p>
+
+        <!-- ZiUDP Section -->
+        <div class="config-section">
+            <div class="config-card">
+                <h2 class="config-title">ZiUDP Configurations</h2>
+                <p class="config-desc">Premium ZiUDP configurations specially tuned for free servers on Thai mobile networks.</p>
+                <a href="https://raw.githubusercontent.com/yourrepo/ziudp-config.json" class="btn" download>GET NOW</a>
+            </div>
+        </div>
+
+        <!-- Reward Ad -->
+        <div class="ads-container">
+            <button id="rewardAdBtn" class="btn">
+                <i class="fas fa-gift"></i> Watch Ad for Premium Config
+            </button>
+        </div>
+
+        <!-- Another Banner Ad -->
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-0000000000000000"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <footer>
+            <p>© 2023 DTAC TRUE AIS FREE SERVERS | All configurations are updated daily</p>
             <p>For educational purposes only</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const body = document.body;
+        
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Digital Clock
+        function updateClock() {
+            const now = new Date();
+            const days = ['တနင်္ဂနွေ', 'တနင်္လာ', 'အင်္ဂါ', 'ဗုဒ္ဓဟူး', 'ကြာသပတေး', 'သောကြာ', 'စနေ'];
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const months = ['ဇန်နဝါရီ', 'ဖေဖော်ဝါရီ', 'မတ်', 'ဧပြီ', 'မေ', 'ဇွန်', 'ဇူလိုင်', 'သြဂုတ်', 'စက်တင်ဘာ', 'အောက်တိုဘာ', 'နိုဝင်ဘာ', 'ဒီဇင်ဘာ'];
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('clock').textContent = 
+                `${dayName}၊ ${date} ${monthName} ${year} | ${hours}:${minutes}:${seconds}`;
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // AdMob Reward Ad
+        document.getElementById('rewardAdBtn').addEventListener('click', function() {
+            // In a real app, you would call the AdMob API here
+            alert('Reward ad would play here. After completion, premium config would be unlocked.');
+            
+            // For demo purposes, we'll just show a success message
+            setTimeout(() => {
+                alert('Ad completed! Here is your premium configuration link: https://raw.githubusercontent.com/yourrepo/premium-config.json');
+            }, 1500);
+        });
+
+        // Initialize AdMob (this would be more extensive in a real app)
+        document.addEventListener('DOMContentLoaded', function() {
+            // AdMob initialization code would go here
+            console.log('AdMob test ads initialized');
+        });
+    </script>
 </body>
 </html>

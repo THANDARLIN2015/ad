@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thai Network Tools Download Center</title>
+    <title>Free Internet Thailand - Network Tools Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4285f4;
-            --dtac-color: #6e40c4;
-            --true-color: #e61875;
-            --ais-color: #00a1e0;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
+            --primary: #3B82F6;
+            --v2ray: #8B5CF6;
+            --netmod: #10B981;
+            --zivpn: #EC4899;
+            --dark: #1F2937;
+            --light: #F3F4F6;
         }
         
         * {
@@ -23,9 +23,9 @@
         }
         
         body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+            color: var(--dark);
+            min-height: 100vh;
         }
         
         .container {
@@ -36,143 +36,179 @@
         
         header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         h1 {
-            color: var(--primary-color);
+            color: var(--primary);
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .description {
-            color: #666;
+        .subtitle {
+            color: #6B7280;
+            font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .network-grid {
+        .network-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
-        .network-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .tool-card {
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .network-card:hover {
+        .tool-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
         
-        .card-header {
+        .tool-header {
             padding: 20px;
             color: white;
             text-align: center;
         }
         
-        .dtac {
-            background-color: var(--dtac-color);
-            background: linear-gradient(135deg, var(--dtac-color) 0%, #8e44ad 100%);
+        .v2ray-bg {
+            background: linear-gradient(135deg, var(--v2ray) 0%, #7C3AED 100%);
         }
         
-        .true {
-            background-color: var(--true-color);
-            background: linear-gradient(135deg, var(--true-color) 0%, #c0392b 100%);
+        .netmod-bg {
+            background: linear-gradient(135deg, var(--netmod) 0%, #059669 100%);
         }
         
-        .ais {
-            background-color: var(--ais-color);
-            background: linear-gradient(135deg, var(--ais-color) 0%, #0066cc 100%);
+        .zivpn-bg {
+            background: linear-gradient(135deg, var(--zivpn) 0%, #DB2777 100%);
         }
         
-        .card-header i {
+        .tool-icon {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
-        .card-body {
-            padding: 20px;
+        .tool-body {
+            padding: 25px;
         }
         
-        .card-body p {
+        .tool-body p {
+            color: #6B7280;
             margin-bottom: 20px;
-            color: #555;
         }
         
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: var(--primary-color);
+        .download-btn {
+            display: block;
+            padding: 12px;
+            border-radius: 8px;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
             font-weight: 600;
-            transition: background-color 0.3s;
             text-align: center;
-            width: 100%;
-            margin-bottom: 10px;
+            transition: opacity 0.3s;
         }
         
-        .btn:hover {
+        .download-btn:hover {
             opacity: 0.9;
         }
         
-        .btn-dtac {
-            background-color: var(--dtac-color);
+        .v2ray-btn {
+            background: var(--v2ray);
         }
         
-        .btn-true {
-            background-color: var(--true-color);
+        .netmod-btn {
+            background: var(--netmod);
         }
         
-        .btn-ais {
-            background-color: var(--ais-color);
-        }
-        
-        .file-list {
-            margin-top: 15px;
-        }
-        
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .file-name {
-            color: #555;
-        }
-        
-        .file-size {
-            color: #999;
-            font-size: 0.9em;
+        .zivpn-btn {
+            background: var(--zivpn);
         }
         
         .ad-container {
-            margin: 30px 0;
-            padding: 15px;
-            background-color: #f1f1f1;
-            border-radius: 5px;
+            margin: 40px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px 0;
-            color: #666;
-            border-top: 1px solid #eee;
+            margin-top: 60px;
+            padding: 30px 0;
+            color: #6B7280;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         @media (max-width: 768px) {
-            .network-grid {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -181,8 +217,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Thai Network Tools Download Center</h1>
-            <p class="description">Optimized configuration files for DTAC, TRUE, and AIS networks. For educational purposes only.</p>
+            <h1>Free Internet Thailand</h1>
+            <p class="subtitle">Optimized network tools for Thai mobile providers</p>
         </header>
         
         <!-- AdSense Top Ad -->
@@ -200,82 +236,149 @@
             </script>
         </div>
         
-        <div class="network-grid">
-            <!-- DTAC Card -->
-            <div class="network-card">
-                <div class="card-header dtac">
-                    <i class="fas fa-bolt"></i>
-                    <h2>DTAC Files</h2>
-                </div>
-                <div class="card-body">
-                    <p>Special configurations optimized for DTAC network performance and stability.</p>
-                    
-                    <div class="file-list">
-                        <div class="file-item">
-                            <span class="file-name">DTAC V2Ray Config</span>
-                            <span class="file-size">15KB</span>
-                        </div>
-                        <div class="file-item">
-                            <span class="file-name">DTAC VPN Settings</span>
-                            <span class="file-size">8KB</span>
-                        </div>
+        <div class="network-tabs">
+            <button class="tab-btn active" data-tab="dtac">DTAC</button>
+            <button class="tab-btn" data-tab="true">TRUE</button>
+            <button class="tab-btn" data-tab="ais">AIS</button>
+        </div>
+        
+        <!-- DTAC Content -->
+        <div id="dtac" class="tab-content active">
+            <div class="tools-grid">
+                <!-- V2Ray Card -->
+                <div class="tool-card">
+                    <div class="tool-header v2ray-bg">
+                        <i class="fas fa-shield-alt tool-icon"></i>
+                        <h2>V2RAY FILES</h2>
                     </div>
-                    
-                    <a href="https://raw.githubusercontent.com/example/dtac/main/config.json" class="btn btn-dtac" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Download All DTAC Files
-                    </a>
+                    <div class="tool-body">
+                        <p>Optimized V2Ray configurations specifically for DTAC network with enhanced security protocols.</p>
+                        <a href="https://github.com/yourusername/dtc-v2ray/raw/main/config.json" class="download-btn v2ray-btn" onclick="trackDownload('dtac-v2ray')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- NetMod Card -->
+                <div class="tool-card">
+                    <div class="tool-header netmod-bg">
+                        <i class="fas fa-network-wired tool-icon"></i>
+                        <h2>NetMod FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>Network modification tools to optimize DTAC connection speeds and reduce latency.</p>
+                        <a href="https://github.com/yourusername/dtc-netmod/raw/main/settings.conf" class="download-btn netmod-btn" onclick="trackDownload('dtac-netmod')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- ZiVPN Card -->
+                <div class="tool-card">
+                    <div class="tool-header zivpn-bg">
+                        <i class="fas fa-lock tool-icon"></i>
+                        <h2>ZiVPN FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>Secure VPN configurations for private browsing on DTAC networks.</p>
+                        <a href="https://github.com/yourusername/dtc-zivpn/raw/main/config.ovpn" class="download-btn zivpn-btn" onclick="trackDownload('dtac-zivpn')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <!-- TRUE Card -->
-            <div class="network-card">
-                <div class="card-header true">
-                    <i class="fas fa-fire"></i>
-                    <h2>TRUE Files</h2>
-                </div>
-                <div class="card-body">
-                    <p>Optimized settings for TRUE Move H network with enhanced connection protocols.</p>
-                    
-                    <div class="file-list">
-                        <div class="file-item">
-                            <span class="file-name">TRUE V2Ray Config</span>
-                            <span class="file-size">18KB</span>
-                        </div>
-                        <div class="file-item">
-                            <span class="file-name">TRUE Proxy Settings</span>
-                            <span class="file-size">10KB</span>
-                        </div>
+        </div>
+        
+        <!-- TRUE Content -->
+        <div id="true" class="tab-content">
+            <div class="tools-grid">
+                <!-- V2Ray Card -->
+                <div class="tool-card">
+                    <div class="tool-header v2ray-bg">
+                        <i class="fas fa-shield-alt tool-icon"></i>
+                        <h2>V2RAY FILES</h2>
                     </div>
-                    
-                    <a href="https://raw.githubusercontent.com/example/true/main/config.json" class="btn btn-true" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Download All TRUE Files
-                    </a>
+                    <div class="tool-body">
+                        <p>Special V2Ray setups optimized for TRUE Move H network performance.</p>
+                        <a href="https://github.com/yourusername/true-v2ray/raw/main/config.json" class="download-btn v2ray-btn" onclick="trackDownload('true-v2ray')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- NetMod Card -->
+                <div class="tool-card">
+                    <div class="tool-header netmod-bg">
+                        <i class="fas fa-network-wired tool-icon"></i>
+                        <h2>NetMod FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>Network tweaks to maximize TRUE 5G/4G connection stability.</p>
+                        <a href="https://github.com/yourusername/true-netmod/raw/main/settings.conf" class="download-btn netmod-btn" onclick="trackDownload('true-netmod')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- ZiVPN Card -->
+                <div class="tool-card">
+                    <div class="tool-header zivpn-bg">
+                        <i class="fas fa-lock tool-icon"></i>
+                        <h2>ZiVPN FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>VPN configurations that work best with TRUE's network infrastructure.</p>
+                        <a href="https://github.com/yourusername/true-zivpn/raw/main/config.ovpn" class="download-btn zivpn-btn" onclick="trackDownload('true-zivpn')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <!-- AIS Card -->
-            <div class="network-card">
-                <div class="card-header ais">
-                    <i class="fas fa-wifi"></i>
-                    <h2>AIS Files</h2>
-                </div>
-                <div class="card-body">
-                    <p>Advanced configurations for AIS 5G/4G networks with speed optimization.</p>
-                    
-                    <div class="file-list">
-                        <div class="file-item">
-                            <span class="file-name">AIS V2Ray Config</span>
-                            <span class="file-size">20KB</span>
-                        </div>
-                        <div class="file-item">
-                            <span class="file-name">AIS NetMod Preset</span>
-                            <span class="file-size">12KB</span>
-                        </div>
+        </div>
+        
+        <!-- AIS Content -->
+        <div id="ais" class="tab-content">
+            <div class="tools-grid">
+                <!-- V2Ray Card -->
+                <div class="tool-card">
+                    <div class="tool-header v2ray-bg">
+                        <i class="fas fa-shield-alt tool-icon"></i>
+                        <h2>V2RAY FILES</h2>
                     </div>
-                    
-                    <a href="https://raw.githubusercontent.com/example/ais/main/config.json" class="btn btn-ais" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Download All AIS Files
-                    </a>
+                    <div class="tool-body">
+                        <p>Advanced V2Ray configurations for AIS 5G/4G networks.</p>
+                        <a href="https://github.com/yourusername/ais-v2ray/raw/main/config.json" class="download-btn v2ray-btn" onclick="trackDownload('ais-v2ray')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- NetMod Card -->
+                <div class="tool-card">
+                    <div class="tool-header netmod-bg">
+                        <i class="fas fa-network-wired tool-icon"></i>
+                        <h2>NetMod FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>Performance tweaks specifically designed for AIS network architecture.</p>
+                        <a href="https://github.com/yourusername/ais-netmod/raw/main/settings.conf" class="download-btn netmod-btn" onclick="trackDownload('ais-netmod')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- ZiVPN Card -->
+                <div class="tool-card">
+                    <div class="tool-header zivpn-bg">
+                        <i class="fas fa-lock tool-icon"></i>
+                        <h2>ZiVPN FILES</h2>
+                    </div>
+                    <div class="tool-body">
+                        <p>Secure VPN setups optimized for AIS network conditions.</p>
+                        <a href="https://github.com/yourusername/ais-zivpn/raw/main/config.ovpn" class="download-btn zivpn-btn" onclick="trackDownload('ais-zivpn')">
+                            <i class="fas fa-download"></i> Download Config
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -295,18 +398,15 @@
             </script>
         </div>
         
-        <div class="additional-content">
-            <h2 style="text-align: center; margin-bottom: 20px;">Usage Guidelines</h2>
-            <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
-                <p style="margin-bottom: 15px;">These configuration files are provided for educational and research purposes only. Please note:</p>
-                <ul style="margin-left: 20px; margin-bottom: 15px; color: #555;">
-                    <li>Always comply with your local laws and regulations</li>
-                    <li>Respect network provider terms of service</li>
-                    <li>Use responsibly and ethically</li>
-                    <li>We are not responsible for any misuse</li>
-                </ul>
-                <p>For optimal results, test different configurations with your specific device and location.</p>
-            </div>
+        <div class="disclaimer">
+            <h3 style="text-align: center; margin-bottom: 15px; color: var(--primary);">Important Notice</h3>
+            <p style="margin-bottom: 10px;">These tools and configurations are provided for educational purposes only. Please:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px; color: #6B7280;">
+                <li>Always comply with local laws and regulations</li>
+                <li>Respect network provider terms of service</li>
+                <li>Use responsibly and ethically</li>
+            </ul>
+            <p>We do not guarantee any specific results and are not responsible for any misuse of these tools.</p>
         </div>
         
         <!-- AdSense Bottom Ad -->
@@ -325,13 +425,50 @@
         </div>
         
         <footer>
-            <p>&copy; 2023 Thai Network Tools. All rights reserved.</p>
-            <p>
-                <a href="/privacy" style="color: var(--primary-color);">Privacy Policy</a> | 
-                <a href="/terms" style="color: var(--primary-color);">Terms of Service</a> | 
-                <a href="/contact" style="color: var(--primary-color);">Contact</a>
+            <p>&copy; 2023 Free Internet Thailand. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="/privacy" style="color: var(--primary); text-decoration: none;">Privacy Policy</a> | 
+                <a href="/terms" style="color: var(--primary); text-decoration: none;">Terms of Service</a> | 
+                <a href="/contact" style="color: var(--primary); text-decoration: none;">Contact</a>
             </p>
         </footer>
     </div>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Download tracking (replace with your analytics)
+        function trackDownload(fileType) {
+            console.log(`Download initiated: ${fileType}`);
+            // Add your analytics code here
+        }
+        
+        // Hide GitHub URL in status bar
+        document.querySelectorAll('a[href^="https://github.com"]').forEach(link => {
+            link.addEventListener('mouseover', function() {
+                window.status = "Downloading configuration file...";
+            });
+            link.addEventListener('mouseout', function() {
+                window.status = "";
+            });
+        });
+    </script>
 </body>
 </html>

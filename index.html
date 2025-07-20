@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Tools Download Center</title>
+    <title>Thai Network Tools Download Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #4285f4;
-            --v2ray-color: #8e44ad;
-            --zivpn-color: #e74c3c;
-            --netmod-color: #27ae60;
+            --dtac-color: #6e40c4;
+            --true-color: #e61875;
+            --ais-color: #00a1e0;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
         }
@@ -51,14 +51,14 @@
             margin: 0 auto;
         }
         
-        .tools-grid {
+        .network-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
         
-        .tool-card {
+        .network-card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,7 @@
             transition: transform 0.3s ease;
         }
         
-        .tool-card:hover {
+        .network-card:hover {
             transform: translateY(-5px);
         }
         
@@ -76,16 +76,19 @@
             text-align: center;
         }
         
-        .v2ray {
-            background-color: var(--v2ray-color);
+        .dtac {
+            background-color: var(--dtac-color);
+            background: linear-gradient(135deg, var(--dtac-color) 0%, #8e44ad 100%);
         }
         
-        .zivpn {
-            background-color: var(--zivpn-color);
+        .true {
+            background-color: var(--true-color);
+            background: linear-gradient(135deg, var(--true-color) 0%, #c0392b 100%);
         }
         
-        .netmod {
-            background-color: var(--netmod-color);
+        .ais {
+            background-color: var(--ais-color);
+            background: linear-gradient(135deg, var(--ais-color) 0%, #0066cc 100%);
         }
         
         .card-header i {
@@ -113,10 +116,43 @@
             transition: background-color 0.3s;
             text-align: center;
             width: 100%;
+            margin-bottom: 10px;
         }
         
         .btn:hover {
-            background-color: #3367d6;
+            opacity: 0.9;
+        }
+        
+        .btn-dtac {
+            background-color: var(--dtac-color);
+        }
+        
+        .btn-true {
+            background-color: var(--true-color);
+        }
+        
+        .btn-ais {
+            background-color: var(--ais-color);
+        }
+        
+        .file-list {
+            margin-top: 15px;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .file-name {
+            color: #555;
+        }
+        
+        .file-size {
+            color: #999;
+            font-size: 0.9em;
         }
         
         .ad-container {
@@ -136,7 +172,7 @@
         }
         
         @media (max-width: 768px) {
-            .tools-grid {
+            .network-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -145,8 +181,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Network Tools Download Center</h1>
-            <p class="description">Get the latest configuration files for your favorite network tools. All files are provided for educational purposes only.</p>
+            <h1>Thai Network Tools Download Center</h1>
+            <p class="description">Optimized configuration files for DTAC, TRUE, and AIS networks. For educational purposes only.</p>
         </header>
         
         <!-- AdSense Top Ad -->
@@ -164,45 +200,81 @@
             </script>
         </div>
         
-        <div class="tools-grid">
-            <!-- V2Ray Card -->
-            <div class="tool-card">
-                <div class="card-header v2ray">
-                    <i class="fas fa-shield-alt"></i>
-                    <h2>V2Ray Files</h2>
+        <div class="network-grid">
+            <!-- DTAC Card -->
+            <div class="network-card">
+                <div class="card-header dtac">
+                    <i class="fas fa-bolt"></i>
+                    <h2>DTAC Files</h2>
                 </div>
                 <div class="card-body">
-                    <p>Download the latest V2Ray configuration files for various platforms. These files help establish secure connections.</p>
-                    <a href="https://raw.githubusercontent.com/example/v2ray/main/config.json" class="btn" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Get Now
+                    <p>Special configurations optimized for DTAC network performance and stability.</p>
+                    
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span class="file-name">DTAC V2Ray Config</span>
+                            <span class="file-size">15KB</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-name">DTAC VPN Settings</span>
+                            <span class="file-size">8KB</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://raw.githubusercontent.com/example/dtac/main/config.json" class="btn btn-dtac" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-download"></i> Download All DTAC Files
                     </a>
                 </div>
             </div>
             
-            <!-- ZiVPN Card -->
-            <div class="tool-card">
-                <div class="card-header zivpn">
-                    <i class="fas fa-lock"></i>
-                    <h2>ZiVPN Files</h2>
+            <!-- TRUE Card -->
+            <div class="network-card">
+                <div class="card-header true">
+                    <i class="fas fa-fire"></i>
+                    <h2>TRUE Files</h2>
                 </div>
                 <div class="card-body">
-                    <p>ZiVPN configuration files for enhanced privacy and security. Compatible with multiple devices and platforms.</p>
-                    <a href="https://raw.githubusercontent.com/example/zivpn/main/config.ovpn" class="btn" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Get Now
+                    <p>Optimized settings for TRUE Move H network with enhanced connection protocols.</p>
+                    
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span class="file-name">TRUE V2Ray Config</span>
+                            <span class="file-size">18KB</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-name">TRUE Proxy Settings</span>
+                            <span class="file-size">10KB</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://raw.githubusercontent.com/example/true/main/config.json" class="btn btn-true" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-download"></i> Download All TRUE Files
                     </a>
                 </div>
             </div>
             
-            <!-- NetMod Card -->
-            <div class="tool-card">
-                <div class="card-header netmod">
-                    <i class="fas fa-network-wired"></i>
-                    <h2>NetMod Files</h2>
+            <!-- AIS Card -->
+            <div class="network-card">
+                <div class="card-header ais">
+                    <i class="fas fa-wifi"></i>
+                    <h2>AIS Files</h2>
                 </div>
                 <div class="card-body">
-                    <p>Network modification tools and configuration files to optimize your connection speeds and stability.</p>
-                    <a href="https://raw.githubusercontent.com/example/netmod/main/settings.conf" class="btn" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-download"></i> Get Now
+                    <p>Advanced configurations for AIS 5G/4G networks with speed optimization.</p>
+                    
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span class="file-name">AIS V2Ray Config</span>
+                            <span class="file-size">20KB</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-name">AIS NetMod Preset</span>
+                            <span class="file-size">12KB</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://raw.githubusercontent.com/example/ais/main/config.json" class="btn btn-ais" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-download"></i> Download All AIS Files
                     </a>
                 </div>
             </div>
@@ -224,11 +296,17 @@
         </div>
         
         <div class="additional-content">
-            <h2 style="text-align: center; margin-bottom: 20px;">How to Use These Files</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
-                These configuration files are provided for educational purposes only. Please ensure you comply with all local laws and regulations when using network tools. 
-                Always prioritize security and privacy in your online activities.
-            </p>
+            <h2 style="text-align: center; margin-bottom: 20px;">Usage Guidelines</h2>
+            <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 15px;">These configuration files are provided for educational and research purposes only. Please note:</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; color: #555;">
+                    <li>Always comply with your local laws and regulations</li>
+                    <li>Respect network provider terms of service</li>
+                    <li>Use responsibly and ethically</li>
+                    <li>We are not responsible for any misuse</li>
+                </ul>
+                <p>For optimal results, test different configurations with your specific device and location.</p>
+            </div>
         </div>
         
         <!-- AdSense Bottom Ad -->
@@ -247,11 +325,11 @@
         </div>
         
         <footer>
-            <p>&copy; 2023 Network Tools Resource Center. All rights reserved.</p>
+            <p>&copy; 2023 Thai Network Tools. All rights reserved.</p>
             <p>
                 <a href="/privacy" style="color: var(--primary-color);">Privacy Policy</a> | 
                 <a href="/terms" style="color: var(--primary-color);">Terms of Service</a> | 
-                <a href="/contact" style="color: var(--primary-color);">Contact Us</a>
+                <a href="/contact" style="color: var(--primary-color);">Contact</a>
             </p>
         </footer>
     </div>
